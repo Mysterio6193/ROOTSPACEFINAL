@@ -985,7 +985,7 @@
   .hero_content__DK_Ny {
     display: block;
     align-items: center;
-    padding-top: clamp(17.2rem, 22svh, 19rem);
+    padding-top: clamp(21rem, 30svh, 24rem);
     padding-bottom: 0;
     z-index: 20;
   }
