@@ -20,11 +20,13 @@ const RootspaceLogo = ({ invert = false }) => (
   />
 );
 
-function BurgerIcon() {
+function BurgerIcon({ open = false }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
-      <path stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" d="M4 7h16M4 12h16M4 17h16" />
-    </svg>
+    <span className={`header_burger-icon__rootspace${open ? ' header_burger-icon--open' : ''}`} aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
   );
 }
 
@@ -35,6 +37,27 @@ export default function Header({ color = 'transparent' }) {
   React.useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
+
+  React.useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    }
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [menuOpen]);
 
   const contactHref = pathname === '/' ? '#lets-connect' : '/#lets-connect';
   const servicesHref = pathname === '/' ? '#services' : '/#services';
@@ -74,11 +97,12 @@ export default function Header({ color = 'transparent' }) {
           <button
             type="button"
             className="header_burger-control__YR_x_"
-            aria-label="Open menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
+            data-open={menuOpen ? 'true' : 'false'}
             onClick={() => setMenuOpen((current) => !current)}
           >
-            <BurgerIcon />
+            <BurgerIcon open={menuOpen} />
           </button>
         </div>
       </div>
@@ -86,24 +110,46 @@ export default function Header({ color = 'transparent' }) {
       <div className={`burger-menu_wrapper__gKR7D${menuOpen ? ' burger-menu_open__' : ''}`} style={{ opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? 'auto' : 'none' }}>
         <div className="burger-menu_backdrop__wfXK5" onClick={() => setMenuOpen(false)}></div>
         <div className="burger-menu_content__rv4kf">
-          <nav className="burger-menu_nav__dAhwA" aria-label="Mobile navigation">
-            {routeLinks.map((item) => (
-              <div key={item.to} className="burger-menu_nav-item__mCA9u">
-                <NavLink to={item.to} onClick={() => setMenuOpen(false)}>
-                  {item.label}
-                </NavLink>
+          <div className="burger-menu_panel__rootspace">
+            <div className="burger-menu_intro__rootspace">
+              <div className="burger-menu_eyebrow__rootspace">Rootspace</div>
+            </div>
+
+            <nav className="burger-menu_nav__dAhwA" aria-label="Mobile navigation">
+              {routeLinks.map((item) => (
+                <div key={item.to} className="burger-menu_nav-item__mCA9u">
+                  <NavLink
+                    to={item.to}
+                    onClick={() => setMenuOpen(false)}
+                    className={({ isActive }) => `burger-menu_link__rootspace${isActive ? ' is-active' : ''}`}
+                  >
+                    <span>{item.label}</span>
+                    <span aria-hidden="true">↗</span>
+                  </NavLink>
+                </div>
+              ))}
+              <div className="burger-menu_nav-item__mCA9u">
+                <a href={servicesHref} onClick={() => setMenuOpen(false)} className="burger-menu_link__rootspace">
+                  <span>Spaces</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
               </div>
-            ))}
-            <div className="burger-menu_nav-item__mCA9u">
-              <a href={servicesHref} onClick={() => setMenuOpen(false)}>Spaces</a>
+              <div className="burger-menu_nav-item__mCA9u">
+                <a href={galleryHref} onClick={() => setMenuOpen(false)} className="burger-menu_link__rootspace">
+                  <span>Gallery</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </nav>
+
+            <a href={contactHref} onClick={() => setMenuOpen(false)} className="burger-menu_cta__rootspace">
+              Book a Tour
+            </a>
+
+            <div className="burger-menu_meta__rootspace">
+              A-46, Manipuram Colony, Char Imli, Bittan Market, Bhopal
             </div>
-            <div className="burger-menu_nav-item__mCA9u">
-              <a href={galleryHref} onClick={() => setMenuOpen(false)}>Gallery</a>
-            </div>
-            <div className="burger-menu_nav-item__mCA9u">
-              <a href={contactHref} onClick={() => setMenuOpen(false)}>Book a Tour</a>
-            </div>
-          </nav>
+          </div>
         </div>
       </div>
     </header>
