@@ -2989,7 +2989,18 @@
   }
 
   .rootspace-page__article-image {
-    min-height: 20rem;
+    height: 16rem;
+    min-height: 0;
+  }
+
+  .rootspace-page__image-stack img:first-child {
+    height: 18rem;
+    min-height: 0;
+  }
+
+  .rootspace-page__image-stack img:last-child {
+    height: 14rem;
+    min-height: 0;
   }
 
   .rootspace-page__article-body,
