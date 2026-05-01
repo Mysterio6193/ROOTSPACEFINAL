@@ -2940,7 +2940,8 @@
 
   .rootspace-page__hero-media,
   .rootspace-page__hero-media--tall {
-    min-height: 21rem;
+    height: 20rem;
+    min-height: 0;
     border-radius: 2.4rem;
   }
 
@@ -2964,7 +2965,8 @@
   }
 
   .rootspace-page__plan-image {
-    min-height: 18rem;
+    height: 16rem;
+    min-height: 0;
   }
 
   .rootspace-page__section-head {
