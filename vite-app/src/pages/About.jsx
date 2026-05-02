@@ -23,13 +23,28 @@ const principles = [
   'A Bhopal base that feels polished, practical, and dependable',
 ];
 
+const experienceDetails = [
+  {
+    label: 'Quiet by default',
+    text: 'The layout keeps focus zones calm while still making room for collaboration when it is needed.',
+  },
+  {
+    label: 'Ready for meetings',
+    text: 'Cabins, client-ready rooms, and polished common areas help the space feel more professional day to day.',
+  },
+  {
+    label: 'Comfort that lasts',
+    text: 'Good lighting, reliable basics, and clean upkeep make longer workdays feel easier to sustain.',
+  },
+];
+
 export default function About() {
   return (
     <MainLayout>
-      <div className="rootspace-page">
-        <section className="rootspace-page__hero rootspace-page__hero--warm">
+      <div className="rootspace-page rootspace-page--about">
+        <section className="rootspace-page__hero rootspace-page__hero--warm rootspace-page__hero--about">
           <div className="container_container__v5gtR">
-            <div className="rootspace-page__hero-grid">
+            <div className="rootspace-page__hero-grid rootspace-page__hero-grid--about">
               <div className="rootspace-page__hero-copy">
                 <p className="rootspace-page__eyebrow">About Rootspace</p>
                 <h1>Designed for focused people in Bhopal.</h1>
@@ -40,7 +55,7 @@ export default function About() {
                 </p>
               </div>
 
-              <div className="rootspace-page__hero-media">
+              <div className="rootspace-page__hero-media rootspace-page__hero-media--about">
                 <img src="/assets/collage-home/day-01-photo-00770.jpg" alt="Rootspace lounge area" />
               </div>
             </div>
@@ -49,8 +64,8 @@ export default function About() {
 
         <section className="rootspace-page__section">
           <div className="container_container__v5gtR">
-            <div className="rootspace-page__split">
-              <div>
+            <div className="rootspace-page__split rootspace-page__split--about">
+              <div className="rootspace-page__story">
                 <p className="rootspace-page__eyebrow">What It Feels Like</p>
                 <h2>A workspace that stays practical without feeling plain.</h2>
                 <p className="rootspace-page__body">
@@ -59,9 +74,19 @@ export default function About() {
                 </p>
               </div>
 
-              <div className="rootspace-page__image-stack">
-                <img src="/assets/collage-home/205bb.jpg" alt="Private cabins at Rootspace" />
-                <img src="/assets/collage-home/day-01-photo-01247.jpg" alt="Collaborative work area at Rootspace" />
+              <div className="rootspace-page__about-visual">
+                <figure className="rootspace-page__image-card rootspace-page__image-card--about-main">
+                  <img src="/assets/collage-home/day-01-photo-00874.jpg" alt="Open work lounge at Rootspace" />
+                </figure>
+
+                <div className="rootspace-page__about-notes">
+                  {experienceDetails.map((item) => (
+                    <article key={item.label} className="rootspace-page__about-note">
+                      <p className="rootspace-page__about-note-label">{item.label}</p>
+                      <p>{item.text}</p>
+                    </article>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

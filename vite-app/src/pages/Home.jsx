@@ -549,28 +549,34 @@ export default function Home() {
               <div className="services-modal_title">{serviceModal.label}</div>
               <div className="services-modal_text">{serviceModal.text}</div>
             </div>
-            <div className="services-modal_media">
-              <div style={{ maxWidth: 720, width: '100%' }}>
+            <div className="services-modal_body">
+              <div className="services-modal_visual">
                 <img className="services-modal_image" src={serviceModal.img} alt={serviceModal.label} />
+              </div>
 
-                <div style={{ marginTop: '1.6rem' }}>
-                  <div>
-                    <h4 style={{ margin: '0 0 0.6rem' }}>Includes:</h4>
-                    <ul style={{ margin: 0, paddingLeft: '1.4rem' }}>
-                      {serviceModal.bullets.map((bullet, index) => (
-                        <li key={index} style={{ marginBottom: '0.4rem' }}>{bullet}</li>
-                      ))}
-                    </ul>
-                  </div>
+              <div className="services-modal_sidebar">
+                <div className="services-modal_card">
+                  <h4 className="services-modal_section-title">Includes</h4>
+                  <ul className="services-modal_list">
+                    {serviceModal.bullets.map((bullet, index) => (
+                      <li key={index}>{bullet}</li>
+                    ))}
+                  </ul>
+                </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1.6rem', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '1.2rem' }}>
-                    <div style={{ opacity: 0.9 }}>{serviceModal.duration}</div>
-                    <div style={{ fontSize: '1.6rem', fontWeight: 700 }}>{serviceModal.price}</div>
+                <div className="services-modal_meta">
+                  <div className="services-modal_meta-block">
+                    <div className="services-modal_meta-label">Duration</div>
+                    <div className="services-modal_duration">{serviceModal.duration}</div>
                   </div>
+                  <div className="services-modal_meta-block services-modal_meta-block--price">
+                    <div className="services-modal_meta-label">Starting at</div>
+                    <div className="services-modal_price">{serviceModal.price}</div>
+                  </div>
+                </div>
 
-                  <div style={{ marginTop: '0.8rem', opacity: 0.7, fontSize: '0.95rem' }}>
-                    18% GST is additional. Personalised quotations are available for different durations and team sizes.
-                  </div>
+                <div className="services-modal_note">
+                  18% GST is additional. Personalised quotations are available for different durations and team sizes.
                 </div>
               </div>
             </div>
